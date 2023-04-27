@@ -22,7 +22,7 @@ const Navbar = () => {
           LOGO
         </div>
         <div className="hidden md:block">
-          {user.length ? (
+          {user?.length ? (
             <nav className="text-gray-500 text-lg ">
               <NavLink to="/" className="nav ">
                 Properties
@@ -37,7 +37,7 @@ const Navbar = () => {
           )}
         </div>
         <div className="flex text-gray-400 text-lg">
-          {user.length ? (
+          {user?.length ? (
             <div
               onClick={handleLogout}
               className="text-yellow-100  bg-blue-900 px-5 cursor-pointer   rounded-md pt-1 hover:bg-blue-400 transition ease-out duration-500"
