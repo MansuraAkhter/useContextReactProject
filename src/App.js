@@ -1,23 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./Layout";
+import AllApartments from "./AllApartments";
+import ApartmentDetails from "./ApartmentDetails";
+import BookingStore from "./BookingStore";
+import Signin from "./Signin";
+import {
+  BookedApartmentContext,
+  BookedApDetailsContext,
+  AuthContext,
+} from "./Helper/Context";
+import PrivateRoutes from "./PrivateRoutes";
+import { useState } from "react";
 
 function App() {
+  const [bookedApId, setBookedApId] = useState("");
+  const [bookedApDetails, setBookedApDetails] = useState([]);
+  const [user, setUser] = useState({});
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+        <BookedApartmentContext.Provider value={{ bookedApId, setBookedApId }}>
+          <BookedApDetailsContext.Provider
+            value={{ bookedApDetails, setBookedApDetails }}
+          >
+            <AuthContext.Provider value={{ user, setUser }}>
+              <Routes>
+                <Route element={<Layout />}>
+                  <Route path="/admin" element={<Signin />} />
+                  <Route element={<PrivateRoutes />}>
+                    <Route path="/bookingList" element={<BookingStore />} />
+                  </Route>
+
+                  <Route path="/" element={<AllApartments />} />
+                  <Route
+                    path="/apartmentDetails/:id"
+                    element={<ApartmentDetails />}
+                  />
+                </Route>
+              </Routes>
+            </AuthContext.Provider>
+          </BookedApDetailsContext.Provider>
+        </BookedApartmentContext.Provider>
+      </BrowserRouter>
     </div>
   );
 }
