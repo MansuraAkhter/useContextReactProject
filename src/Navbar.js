@@ -13,6 +13,11 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     await signOut(auth);
+    navigate("/admin");
+  };
+
+  const openAdmin = async () => {
+    navigate("/admin");
   };
 
   return (
@@ -35,6 +40,12 @@ const Navbar = () => {
           ) : (
             ""
           )}
+        </div>
+        <div
+          className="text-yellow-100  bg-blue-900 px-5 cursor-pointer   rounded-md pt-1 hover:bg-blue-400 transition ease-out duration-500"
+          onClick={openAdmin}
+        >
+          Admin panel
         </div>
         <div className="flex text-gray-400 text-lg">
           {user?.email ? (

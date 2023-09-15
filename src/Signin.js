@@ -37,13 +37,13 @@ const Signin = () => {
                 values.password
               );
               console.log(user);
+              navigate("/");
             } catch (error) {
               console.log(error.message);
             }
           };
           console.log(values.email);
           login();
-          navigate("/");
         }}
       >
         {({
@@ -104,6 +104,10 @@ const Signin = () => {
                 </div>
               </div>
             </form>
+            <div className="p-4">
+              <h1>email: admin01@gmail.com</h1>
+              <h1>password: admin01</h1>
+            </div>
           </div>
         )}
       </Formik>
